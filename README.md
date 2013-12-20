@@ -18,3 +18,7 @@ Refer to https://github.com/square/SocketRocket to learn more about SocketRocket
 ## License
 
 [MIT](./LICENSE)
+
+## Tags
+
+WebSocketRails-iOS WebSocketRails iOS WebSocket Rails Web Socket Rails iOS
