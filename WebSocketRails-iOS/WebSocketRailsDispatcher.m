@@ -136,4 +136,9 @@
     [_connection trigger:pong];
 }
 
+- (void)disconnect
+{
+    [_connection disconnect];
+}
+
 @end

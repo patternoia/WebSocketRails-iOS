@@ -52,6 +52,11 @@
     }
 }
 
+- (void)disconnect
+{
+    [_webSocket close];
+}
+
 #pragma mark - SRWebSocketDelegate
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
 {

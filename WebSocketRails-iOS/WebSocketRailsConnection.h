@@ -17,4 +17,6 @@
 - (void)trigger:(WebSocketRailsEvent *)event;
 - (void)flushQueue:(NSNumber *)id;
 
+- (void)disconnect;
+
 @end
