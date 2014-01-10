@@ -115,7 +115,7 @@
 
 - (void)unsubscribe:(NSString *)channelName
 {
-    if (_channels[channelName])
+    if (!_channels[channelName])
         return;
     
     [_channels[channelName] destroy];
