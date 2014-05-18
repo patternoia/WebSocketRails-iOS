@@ -13,9 +13,9 @@ Pod::Spec.new do |s|
   s.author             = "patternoia"
   s.social_media_url   = "http://github.com/patternoia"
   s.platform           = :ios, "7.0"
-  s.source             = { :git => "https://github.com/monsieurje/WebSocketRails-iOS", :tag => "1.0.0" }
+  s.source             = { :git => "https://github.com/monsieurje/WebSocketRails-iOS.git", :tag => "1.0.0" }
   s.source_files       = "WebSocketRails-iOS/*.{h,m}"
-  s.library            = "libicucore"
+  s.library            = "icucore"
   s.requires_arc       = true
-  s.dependency         = "SocketRocket", "~> 0.3.1-beta2"
+  s.dependency           "SocketRocket", "~> 0.3.1-beta2"
 end
