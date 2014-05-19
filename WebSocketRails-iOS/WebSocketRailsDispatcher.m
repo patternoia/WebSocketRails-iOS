@@ -64,8 +64,10 @@
 - (void)connectionEstablished:(id)data
 {
     _state = @"connected";
-    _connectionId = data[@"connectionId"] ? data[@"connectionId"] : [NSNull null];
-    [_connection flushQueue:data[@"connectionId"]];
+    _connectionId = data[@"connection_id"] ? data[@"connection_id"] : [NSNull null];
+    [_connection flushQueue:data[@"connection_id"]];
+    WebSocketRailsEvent *connectionEstablishedEvent = [WebSocketRailsEvent.alloc initWithData:@[@"connection_opened", @{}, _connectionId]];
+    [self dispatch:connectionEstablishedEvent];
 }
 
 - (void)bind:(NSString *)eventName callback:(EventCompletionBlock)callback

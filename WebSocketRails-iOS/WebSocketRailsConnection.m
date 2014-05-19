@@ -71,13 +71,6 @@
     [_dispatcher newMessage:data];
 }
 
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket
-{
-    WebSocketRailsEvent *openedEvent = [WebSocketRailsEvent.alloc initWithData:@[@"connection_opened", @{}]];
-    _dispatcher.state = @"connected";
-    [_dispatcher dispatch:openedEvent];
-}
-
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
     WebSocketRailsEvent *closeEvent = [WebSocketRailsEvent.alloc initWithData:@[@"connection_closed", @{}]];
