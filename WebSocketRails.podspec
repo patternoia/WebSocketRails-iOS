@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name               = "WebSocketRails"
-  s.version            = "1.0.1"
+  s.version            = "1.1.0"
   s.summary            = "WebSocketRails client for iOS."
   s.description        = <<-DESC
                          Port of JavaScript client provided by https://github.com/websocket-rails/websocket-rails
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.author             = "patternoia"
   s.social_media_url   = "http://github.com/patternoia"
   s.platform           = :ios, "7.0"
-  s.source             = { :git => "https://github.com/monsieurje/WebSocketRails-iOS.git", :tag => "1.0.1" }
+  s.source             = { :git => "https://github.com/monsieurje/WebSocketRails-iOS.git", :tag => "1.1.0" }
   s.source_files       = "WebSocketRails-iOS/*.{h,m}"
   s.library            = "icucore"
   s.requires_arc       = true
