@@ -32,6 +32,7 @@
 - (WebSocketRailsChannel *)subscribe:(NSString *)channelName;
 - (void)unsubscribe:(NSString *)channelName;
 
+- (void)connect;
 - (void)disconnect;
 
 @end

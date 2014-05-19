@@ -30,7 +30,7 @@
         
         _webSocket = [SRWebSocket.alloc initWithURL:_url];
         _webSocket.delegate = self;
-        [_webSocket open];
+        // [_webSocket open];
     }
     return self;
 }
@@ -52,6 +52,11 @@
     }
 }
 
+- (void)connect
+{
+    [_webSocket open];
+}
+
 - (void)disconnect
 {
     [_webSocket close];
@@ -64,6 +69,13 @@
     id messageData = [message isKindOfClass:[NSData class]] ? message : [message dataUsingEncoding:NSUTF8StringEncoding];
     id data = [NSJSONSerialization JSONObjectWithData:messageData options:NSJSONReadingMutableContainers error:nil];
     [_dispatcher newMessage:data];
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket
+{
+    WebSocketRailsEvent *openedEvent = [WebSocketRailsEvent.alloc initWithData:@[@"connection_opened", @{}]];
+    _dispatcher.state = @"connected";
+    [_dispatcher dispatch:openedEvent];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
