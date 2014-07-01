@@ -13,6 +13,8 @@
 #import "WebSocketRailsChannel.h"
 #import "WebSocketRailsTypes.h"
 
+#define kPingPongFailureNotification @"com.patternoia.WebSocketRails.kPingPongFailureNotification"
+
 @class WebSocketRailsChannel;
 
 @interface WebSocketRailsDispatcher : NSObject
