@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.author             = "patternoia"
   s.social_media_url   = "http://github.com/patternoia"
   s.platform           = :ios, "7.0"
-  s.source             = { :git => "https://github.com/monsieurje/WebSocketRails-iOS.git", :tag => "1.1.0" }
+  s.source             = { :git => "https://github.com/iltercengiz/WebSocketRails-iOS.git", :tag => "1.1.1" }
   s.source_files       = "WebSocketRails-iOS/*.{h,m}"
   s.library            = "icucore"
   s.requires_arc       = true
