@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableDictionary *channels;
-@property (nonatomic, strong) NSNumber *connectionId;
+@property (nonatomic, strong) NSString *connectionId;
 
 - (id)initWithUrl:(NSURL *)url;
 
