@@ -37,6 +37,9 @@
             if (_attr[@"data"] && _attr[@"data"] != [NSNull null])
                 _data = _attr[@"data"];
             
+            if (_attr[@"token"] && _attr[@"token"] != [NSNull null])
+                _token = _attr[@"token"];
+            
             if ([data count] > 2 && data[2] && data[2] != [NSNull null])
                 _connectionId = data[2];
             else
@@ -88,7 +91,8 @@
 {
     return @{@"id": _id ? _id : [NSNull null],
              @"channel": _channel ? _channel : [NSNull null],
-             @"data": _data ? _data : [NSNull null]
+             @"data": _data ? _data : [NSNull null],
+             @"token": _token ? _token : [NSNull null]
              };
 }
 

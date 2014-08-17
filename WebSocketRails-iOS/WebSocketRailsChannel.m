@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *eventName;
 @property (nonatomic, strong) NSMutableDictionary *callbacks;
 @property (nonatomic, strong) NSString *channelName;
+@property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) WebSocketRailsDispatcher *dispatcher;
 
 @end
@@ -40,10 +41,10 @@
                                         _dispatcher.connectionId ? _dispatcher.connectionId : [NSNull null]]
                                                                      success:nil failure:nil];
         
-        [dispatcher triggerEvent:event];
-        
         // Mutable disctionary of mutable arrays
         _callbacks = [NSMutableDictionary dictionary];
+    
+        [dispatcher triggerEvent:event];
     }
     return self;
 }
@@ -60,7 +61,7 @@
 {
     WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:
                                   @[eventName,
-                                    @{@"channel": _channelName, @"data": message},
+                                    @{@"channel": _channelName, @"data": message, @"token": _token},
                                     _dispatcher.connectionId]
                                                                  success:nil failure:nil];
     [_dispatcher triggerEvent:event];
@@ -68,12 +69,19 @@
 
 - (void)dispatch:(NSString *)eventName message:(id)message
 {
-    if (!_callbacks[eventName])
-        return;
-    
-    for (EventCompletionBlock callback in _callbacks[eventName])
-    {
-        callback(message);
+    if([eventName isEqualToString:@"websocket_rails.channel_token"]) {
+        
+        NSMutableDictionary* info = (NSMutableDictionary*) message;
+        self.token = [info objectForKey:@"token"];
+    }
+    else {
+        if (!_callbacks[eventName])
+            return;
+        
+        for (EventCompletionBlock callback in _callbacks[eventName])
+        {
+            callback(message);
+        }
     }
 }
 

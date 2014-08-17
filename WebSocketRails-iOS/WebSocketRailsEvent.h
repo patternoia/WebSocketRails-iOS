@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSNumber *id;
 @property (nonatomic, strong) NSString *channel;
 @property (nonatomic, strong) id data;
+@property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSNumber *connectionId;
 @property (nonatomic, assign) BOOL success;
 @property (nonatomic, assign) BOOL result;
