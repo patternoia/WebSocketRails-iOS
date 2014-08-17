@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSMutableDictionary *queue;
 @property (nonatomic, strong) NSMutableDictionary *callbacks;
 @property (nonatomic, strong) WebSocketRailsConnection *connection;
+@property (nonatomic, strong) NSTimer *pingPongTimer;
 
 @end
 
@@ -64,8 +65,11 @@
 - (void)connectionEstablished:(id)data
 {
     _state = @"connected";
-    _connectionId = data[@"connectionId"] ? data[@"connectionId"] : [NSNull null];
-    [_connection flushQueue:data[@"connectionId"]];
+    _connectionId = data[@"connection_id"] ? data[@"connection_id"] : [NSNull null];
+    [_connection flushQueue:data[@"connection_id"]];
+    WebSocketRailsEvent *connectionEstablishedEvent = [WebSocketRailsEvent.alloc initWithData:@[@"connection_opened", @{}, _connectionId]];
+    [self dispatch:connectionEstablishedEvent];
+    _pingPongTimer = [NSTimer timerWithTimeInterval:12 target:self selector:@selector(handlePingPongFailure) userInfo:nil repeats:NO];
 }
 
 - (void)bind:(NSString *)eventName callback:(EventCompletionBlock)callback
@@ -132,8 +136,21 @@
 
 - (void)pong
 {
+    [_pingPongTimer invalidate];
+    _pingPongTimer = [NSTimer timerWithTimeInterval:12 target:self selector:@selector(handlePingPongFailure) userInfo:nil repeats:NO];
+    
     WebSocketRailsEvent *pong = [WebSocketRailsEvent.alloc initWithData:@[@"websocket_rails.pong", @{}, _connectionId ? _connectionId : [NSNull null]]];
     [_connection trigger:pong];
+}
+
+- (void)handlePingPongFailure
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPingPongFailureNotification object:self userInfo:nil];
+}
+
+- (void)connect
+{
+    [_connection connect];
 }
 
 - (void)disconnect

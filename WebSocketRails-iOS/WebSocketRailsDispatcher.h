@@ -13,6 +13,8 @@
 #import "WebSocketRailsChannel.h"
 #import "WebSocketRailsTypes.h"
 
+#define kPingPongFailureNotification @"com.patternoia.WebSocketRails.kPingPongFailureNotification"
+
 @class WebSocketRailsChannel;
 
 @interface WebSocketRailsDispatcher : NSObject
@@ -20,7 +22,7 @@
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableDictionary *channels;
-@property (nonatomic, strong) NSNumber *connectionId;
+@property (nonatomic, strong) id connectionId;
 
 - (id)initWithUrl:(NSURL *)url;
 
@@ -32,6 +34,7 @@
 - (WebSocketRailsChannel *)subscribe:(NSString *)channelName;
 - (void)unsubscribe:(NSString *)channelName;
 
+- (void)connect;
 - (void)disconnect;
 
 @end
