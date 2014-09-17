@@ -61,7 +61,7 @@
 {
     WebSocketRailsEvent *event = [WebSocketRailsEvent.alloc initWithData:
                                   @[eventName,
-                                    @{@"channel": _channelName, @"data": message, @"token": _token},
+                                    @{@"channel": _channelName, @"data": message, @"token": _token ? _token : [NSNull null]},
                                     _dispatcher.connectionId]
                                                                  success:nil failure:nil];
     [_dispatcher triggerEvent:event];

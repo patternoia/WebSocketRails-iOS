@@ -30,7 +30,7 @@
         
         _webSocket = [SRWebSocket.alloc initWithURL:_url];
         _webSocket.delegate = self;
-        [_webSocket open];
+        // [_webSocket open];
     }
     return self;
 }
@@ -50,6 +50,11 @@
         NSString *serializedEvent = [event serialize];
         [_webSocket send:serializedEvent];
     }
+}
+
+- (void)connect
+{
+    [_webSocket open];
 }
 
 - (void)disconnect
