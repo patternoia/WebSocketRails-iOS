@@ -86,6 +86,11 @@
     _queue[event.id] = event;
     [_connection trigger:event];
 }
+
+- (void)trigger:(NSString *)eventName data:(id)data {
+    
+    [self trigger:eventName data:data success:nil failure:nil];
+}
  
  - (void)triggerEvent:(WebSocketRailsEvent *)event
  {
@@ -105,6 +110,11 @@
     {
         callback(event.data);
     }
+}
+
+- (BOOL)isSubscribed:(NSString *)channelName {
+    
+    return _channels[channelName] != nil;
 }
 
 - (WebSocketRailsChannel *)subscribe:(NSString *)channelName

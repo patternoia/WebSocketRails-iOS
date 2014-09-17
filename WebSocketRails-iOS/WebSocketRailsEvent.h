@@ -12,14 +12,14 @@
 @interface WebSocketRailsEvent : NSObject
 
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) id attr;
+@property (nonatomic, strong, readonly) id attr;
 @property (nonatomic, strong) NSNumber *id;
 @property (nonatomic, strong) NSString *channel;
 @property (nonatomic, strong) id data;
-@property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) NSNumber *connectionId;
-@property (nonatomic, assign) BOOL success;
-@property (nonatomic, assign) BOOL result;
+@property (nonatomic, strong, readonly) NSString *token;
+@property (nonatomic, strong, readonly) NSNumber *connectionId;
+@property (nonatomic, assign, readonly) BOOL success;
+@property (nonatomic, assign, readonly) BOOL result;
 
 - (id)initWithData:(id)data;
 - (id)initWithData:(id)data success:(EventCompletionBlock)success failure:(EventCompletionBlock)failure;

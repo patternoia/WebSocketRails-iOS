@@ -21,8 +21,8 @@
 
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong) NSMutableDictionary *channels;
-@property (nonatomic, strong) id connectionId;
+@property (nonatomic, strong, readonly) NSMutableDictionary *channels;
+@property (nonatomic, strong, readonly) id connectionId;
 
 - (id)initWithUrl:(NSURL *)url;
 
@@ -30,7 +30,9 @@
 - (void)newMessage:(NSArray *)data;
 - (void)bind:(NSString *)eventName callback:(EventCompletionBlock)callback;
 - (void)trigger:(NSString *)eventName data:(id)data success:(EventCompletionBlock)success failure:(EventCompletionBlock)failure;
+- (void)trigger:(NSString *)eventName data:(id)data;
 - (void)triggerEvent:(WebSocketRailsEvent *)event;
+- (BOOL)isSubscribed:(NSString *)channelName;
 - (WebSocketRailsChannel *)subscribe:(NSString *)channelName;
 - (void)unsubscribe:(NSString *)channelName;
 
