@@ -42,6 +42,7 @@
             
             if ([data count] > 2 && data[2] && data[2] != [NSNull null])
                 _connectionId = data[2];
+                _data = data[1];
             else
                 _connectionId = @0;
             
